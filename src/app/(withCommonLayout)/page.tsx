@@ -23,7 +23,6 @@ import { getUser } from "@/services/auth";
 // import Campaign from "@/components/pages/landing_pages/Campaign/Campaign";
 // import { getCampaign } from "@/services/campaign";
 import { Metadata } from "next";
-import CartSideBar from "@/components/pages/cartSideBar/CartSideBar";
 // import Blogs from "@/components/pages/landing_pages/Blogs/Blogs";
 import Banner2 from "@/components/pages/landing_pages/Banner/Banner2";
 import SignatureCollections from "@/components/pages/landing_pages/SignatureCollections/SignatureCollections";
@@ -96,7 +95,7 @@ const page = async () => {
         {/* <FurnitureDemo twoData={twoData} /> */}
         <WhyChooseUs />
         <ReviewSection />
-        <EMI emiPlans={emiPlans} />
+        <EMI emiPlans={emiPlans?.data || []} />
         {/* <NewsUpdates /> */}
         {/* <BestSelling products={bestSelling} /> */}
         {/* <Newest products={allproducts} /> */}

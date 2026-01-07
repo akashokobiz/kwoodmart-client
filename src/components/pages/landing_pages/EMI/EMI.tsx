@@ -63,7 +63,7 @@ export default function EMI({ emiPlans }: { emiPlans: any[] }) {
     };
 
     //  only one active EMI config
-    const activeEmiPlan = emiPlans?.data?.find(
+    const activeEmiPlan = emiPlans?.find(
         (item: any) => item.isActive === true
     );
 
@@ -144,7 +144,7 @@ export default function EMI({ emiPlans }: { emiPlans: any[] }) {
                         </motion.h4>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                            {interestRates.map((rate, idx) => (
+                            {interestRates.map((rate: { interestRate: number; termMonths: number }, idx: number) => (
                                 <motion.div
                                     key={idx}
                                     className="text-center p-4 rounded-lg transition-all bg-white"

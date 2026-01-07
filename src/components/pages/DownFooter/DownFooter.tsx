@@ -1,20 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { LiaHomeSolid } from "react-icons/lia";
-import { AiOutlineShopping } from "react-icons/ai";
 
 import Link from "next/link";
-import { BsCart2 } from "react-icons/bs";
 import { FaRegUser } from "react-icons/fa";
 import { TUser } from "@/types";
 import { getUser } from "@/services/auth";
 import { useRouter } from "next/navigation";
-interface FooterProps {
-  userCartProducts: {
-    cartDetails: any[]; // Replace 'any' with the specific type if known
-  };
-}
-const DownFooter: React.FC<FooterProps> = ({ userCartProducts }) => {
+
+const DownFooter: React.FC = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [usersId, setUsersId] = useState<TUser | null>(null);
 

@@ -61,7 +61,7 @@ export default async function page() {
 
             {/* Rates Grid */}
             <div className="grid grid-cols-4 divide-x divide-white/20">
-              {interestRates.map((rate, idx) => (
+              {interestRates.map((rate: { interestRate: number; termMonths: number }, idx: number) => (
                 <div
                   key={idx}
                   className="text-center py-8 px-4 hover:bg-white/5 transition-colors"

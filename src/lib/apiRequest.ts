@@ -42,7 +42,7 @@ export const apiRequest = async <T = unknown>({
           errorMessage = text.substring(0, 200);
         }
       }
-    } catch (e) {
+    } catch {
       errorMessage = `HTTP ${res.status} - Invalid response format`;
     }
 

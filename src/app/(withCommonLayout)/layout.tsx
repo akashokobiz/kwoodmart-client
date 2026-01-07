@@ -34,13 +34,13 @@ export default async function Layout({
         pauseOnHover
         theme="light"
         className=" mt-11 md:mt-18"
-        // style={{ marginTop: '70px' }}
+      // style={{ marginTop: '70px' }}
       />
 
       <MessengerBtn />
       {/* <NavBar /> */}
       {children}
-      <Footer userCartProducts={products?.data} />
+      <Footer />
     </div>
   );
 }

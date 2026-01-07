@@ -12,13 +12,7 @@ import {
 import Link from "next/link";
 import DownFooter from "../../DownFooter/DownFooter";
 
-interface FooterProps {
-  userCartProducts: {
-    cartDetails: any[]; // Replace 'any' with the specific type if known
-  };
-}
-
-const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
+const Footer: React.FC = () => {
   const quickLink = [
     {
       name: "About Us",
@@ -188,7 +182,7 @@ const Footer: React.FC<FooterProps> = ({ userCartProducts }) => {
         </div>
       </div>
 
-      <DownFooter userCartProducts={userCartProducts} />
+      <DownFooter />
     </div>
   );
 };

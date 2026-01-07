@@ -6,13 +6,8 @@ import { FiPlus, FiMinus } from "react-icons/fi";
 import { TProduct } from "@/types";
 import { apiBaseUrl } from "@/config/config";
 import ProductDetailsSlide from "@/slider/ProductDetailsSlide/ProductDetailsSlide";
-import { addToCart } from "@/services/cart";
-import { toast } from "react-toastify";
-import { getUser } from "@/services/auth";
-import { useRouter } from "next/navigation";
 import { useAnimation } from "framer-motion";
 import Link from "next/link";
-import { addToQuote } from "@/services/getQuote";
 
 interface Props {
   product: TProduct;
@@ -24,9 +19,8 @@ interface Props {
 
 const ProductDetails: React.FC<Props> = ({ product, emiPlans = [] }) => {
   const [count, setCount] = useState(1);
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(null);
-  const [level, setLevel] = useState<string | null>(null);
-  const [selectedColor, setSelectedColor] = useState<string | null>(null);
+  const [selectedLevel] = useState<string | null>(null);
+  const [selectedColor] = useState<string | null>(null);
   const [emiMonths, setEmiMonths] = useState<number | null>(null);
   // ADD THESE NEW STATES
   const [accordionOpen, setAccordionOpen] = useState<string | null>(null);
@@ -45,8 +39,6 @@ const ProductDetails: React.FC<Props> = ({ product, emiPlans = [] }) => {
   const [materialNote, setMaterialNote] = useState("");
 
 
-  const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const controls = useAnimation();
 
 
@@ -198,78 +190,78 @@ const ProductDetails: React.FC<Props> = ({ product, emiPlans = [] }) => {
       ? Math.round(((currentMrpPrice - currentPrice) / currentMrpPrice) * 100)
       : 0;
 
-  const handleAddToCart = async () => {
-    const user = await getUser();
-    setLoading(true);
-    if (!user) {
-      toast.error("Please login to add product to cart.");
-      router.push("/login");
-      return;
-    }
-    if (
-      (inventoryType === "levelInventory" ||
-        inventoryType === "colorLevelInventory") &&
-      !selectedLevel
-    ) {
+  // const handleAddToCart = async () => {
+  //   const user = await getUser();
+  //   setLoading(true);
+  //   if (!user) {
+  //     toast.error("Please login to add product to cart.");
+  //     router.push("/login");
+  //     return;
+  //   }
+  //   if (
+  //     (inventoryType === "levelInventory" ||
+  //       inventoryType === "colorLevelInventory") &&
+  //     !selectedLevel
+  //   ) {
 
-      setLoading(false);
-      return;
-    }
+  //     setLoading(false);
+  //     return;
+  //   }
 
-    if (
-      (inventoryType === "colorLevelInventory" ||
-        inventoryType === "colorInventory") &&
-      !selectedColor
-    ) {
+  //   if (
+  //     (inventoryType === "colorLevelInventory" ||
+  //       inventoryType === "colorInventory") &&
+  //     !selectedColor
+  //   ) {
 
-      setLoading(false);
-      return;
-    }
-    try {
-      controls.set({ x: 0, y: 0, scale: 1 });
-      const product: {
-        quantity: number;
-        productRef: string;
-        userRef: string | undefined;
-        inventoryRef?: string | null;
-      } = {
-        quantity: count,
-        productRef: _id,
-        userRef: user?.id,
-      };
+  //     setLoading(false);
+  //     return;
+  //   }
+  //   try {
+  //     controls.set({ x: 0, y: 0, scale: 1 });
+  //     const product: {
+  //       quantity: number;
+  //       productRef: string;
+  //       userRef: string | undefined;
+  //       inventoryRef?: string | null;
+  //     } = {
+  //       quantity: count,
+  //       productRef: _id,
+  //       userRef: user?.id,
+  //     };
 
-      if (inventoryType === "inventory") {
-        product.inventoryRef = Array.isArray(inventoryRef)
-          ? inventoryRef[0]._id
-          : undefined;
-      } else if (inventoryType === "levelInventory") {
-        product.inventoryRef = selectedLevel;
-      } else if (inventoryType === "colorInventory") {
-        product.inventoryRef = selectedColor;
-      } else if (inventoryType === "colorLevelInventory") {
-        product.inventoryRef = selectedColor;
-      }
+  //     if (inventoryType === "inventory") {
+  //       product.inventoryRef = Array.isArray(inventoryRef)
+  //         ? inventoryRef[0]._id
+  //         : undefined;
+  //     } else if (inventoryType === "levelInventory") {
+  //       product.inventoryRef = selectedLevel;
+  //     } else if (inventoryType === "colorInventory") {
+  //       product.inventoryRef = selectedColor;
+  //     } else if (inventoryType === "colorLevelInventory") {
+  //       product.inventoryRef = selectedColor;
+  //     }
 
-      await addToCart(product);
-      toast.success("Product added to cart!");
+  //     await addToCart(product);
+  //     toast.success("Product added to cart!");
 
-      controls.start({
-        scale: 0.01,
-        x: 1200,
-        y: -200,
-        transition: { duration: 0.6, ease: "easeInOut" },
-      });
+  //     controls.start({
+  //       scale: 0.01,
+  //       x: 1200,
+  //       y: -200,
+  //       transition: { duration: 0.6, ease: "easeInOut" },
+  //     });
 
-      setTimeout(() => {
-        controls.set({ x: 10, scale: 0 });
-      }, 1000);
-    } catch (err) {
-      console.error("Failed to add to cart:", err);
-      toast.error("Failed to add product to cart.");
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     setTimeout(() => {
+  //       controls.set({ x: 10, scale: 0 });
+  //     }, 1000);
+  //   } catch (err) {
+  //     console.error("Failed to add to cart:", err);
+  //     toast.error("Failed to add product to cart.");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
 
   //  FIXED IMAGE DISPLAY FUNCTION

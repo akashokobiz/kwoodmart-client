@@ -4,8 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { apiBaseUrl } from "@/config/config";
 import { getUser } from "@/services/auth";
-import { TProduct } from "@/types";
-import { Key, ReactNode, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import NavBar from "@/components/pages/header/NavBar/NavBar";
 import { addToQuote, getQuoteProducts } from "@/services/getQuote";
 import { useSearchParams } from "next/navigation"; // ✅ Import করুন
@@ -17,7 +16,6 @@ import QuoteForm from "@/components/pages/quote/QuoteFrom";
 const Quote = () => { // ✅ async সরিয়ে দিন
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
 
   // ✅ Custom Quote Request State
   const [quoteRequest, setQuoteRequest] = useState<any>(null);
@@ -73,8 +71,6 @@ const Quote = () => { // ✅ async সরিয়ে দিন
         setProducts(data);
       } catch (error) {
         console.error('Failed to load quote products:', error);
-      } finally {
-        setLoading(false);
       }
     };
     fetchQuoteProducts();

@@ -45,11 +45,11 @@ const Page = async ({ params }: PageProps) => {
   // Debug: Check actual data structure
 
   //  plans map
-  const interestRates =
-    activeEmiPlan?.plans?.map((plan: any) => ({
-      termMonths: plan.months,
-      interestRate: plan.interestRate,
-    })) || [];
+  // const interestRates =
+  //   activeEmiPlan?.plans?.map((plan: any) => ({
+  //     termMonths: plan.months,
+  //     interestRate: plan.interestRate,
+  //   })) || [];
 
 
   return (
